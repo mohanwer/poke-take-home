@@ -1,20 +1,9 @@
 import Link from 'next/link';
 import Pokedex from 'pokedex-promise-v2';
 import { Card, CardContent, CardMedia, Container, Paper, Typography } from "@mui/material";
+import PokemonImage from "@/components/pokemonImage";
 
 const P = new Pokedex();
-
-async function PokemonImage({ pokemon }: { pokemon: Pokedex.Pokemon }) {
-  return (
-    <img
-      src={(pokemon.sprites.front_default as string)}
-      alt={pokemon.name}
-      width="150px"
-      height="150px"
-      style={{ objectFit: "contain" }}
-    />
-  )
-}
 
 export default async function Home() {
   const pokemonList = await P.getPokemonsList(

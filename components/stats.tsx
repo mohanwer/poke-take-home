@@ -1,25 +1,25 @@
 import { StatElement } from "pokedex-promise-v2";
-
-import { Card, CardContent, Typography } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 
 export default function Stats({ stats }: { stats: StatElement[] }) {
   return (
-    <div>
-      {stats.map((stat, index) => (
-        <Card key={index} style={{ margin: "10px" }}>
-          <CardContent>
-            <Typography variant="h6">
-              {stat.stat.name.toUpperCase()}
-            </Typography>
-            <Typography variant="body1">
-              Base Stat: {stat.base_stat}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              Effort: {stat.effort}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Stat Name</TableCell>
+          <TableCell>Base Stat</TableCell>
+          <TableCell>Effort</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {stats.map((stat, index) => (
+          <TableRow key={index}>
+            <TableCell>{stat.stat.name.toUpperCase()}</TableCell>
+            <TableCell>{stat.base_stat}</TableCell>
+            <TableCell>{stat.effort}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }
