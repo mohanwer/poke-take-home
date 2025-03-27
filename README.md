@@ -14,15 +14,34 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Description
+### Implementation Overview
 
-This app will render 10 pokemon. The pokemon cards are clickable.
+**Tech Stack**
 
-When clicking into a card the general information for a pokemon is displayed with it's stats.
+- Bootstrapped with Next.js (npx create-next-app@latest)
+- Styled with Material UI (Cards for listings, Tables for data visualization)
 
-## Limitations
+**Core Functionality**
 
-1. The app will loop through each of the 10 cards and call the pokemon api to retrieve additional infomration. This is
-   expensive and could result in rate limiting from an open source api.
-2. There's no error handling at the moment. If the api fails to load the page may error out.
-3. Cacheing isn't used, so there is over reliance on api calls making the app expensive on the backend.
+1. **Homepage:** Renders 10 interactive Pokémon cards using the PokeAPI.
+2. **Detail View:** Clicking any card navigates to a dedicated page displaying:
+    - Key attributes (height, weight, type)
+    - Statistical breakdown via Material UI Table
+    - Official artwork sprite
+
+### Known Limitations & Optimization Opportunities
+
+1. **API Call Inefficiency**
+    - Current Behavior: Sequential API calls for each Pokémon (10+ individual GET requests per page load).
+    - Risk: High latency and potential PokeAPI rate-limiting (60 requests/minute).
+    - Improvement: Use batch fetching via /pokemon?limit=10 endpoint to reduce calls by 90%.
+2. **Error Handling Gaps**
+    - Current State: Missing fallback UI for API failures or invalid routes.
+    - Impact: Unhandled errors disrupt user experience during outages.
+        - Solution:
+            - Add React Error Boundaries.
+            - Implement loading skeletons and a retry mechanism.
+3. **Missing Cache Strategy**
+    - Issue: No client-side caching for repeated requests.
+    - Consequence: Redundant network usage and slower revisits.
+    - Fix: Integrate stale-while-revalidate (SWR) or localStorage with TTL.
