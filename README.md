@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 **Tech Stack**
 
-- Bootstrapped with Next.js (npx create-next-app@latest)
+- Bootstrapped with Next.js: `npx create-next-app@latest`
 - Styled with Material UI (Cards for listings, Tables for data visualization)
 
 **Core Functionality**
